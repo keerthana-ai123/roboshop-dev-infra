@@ -135,7 +135,7 @@ resource "aws_autoscaling_group" "catalogue" {
     version = aws_launch_template.catalogue.latest_version
   }
   vpc_zone_identifier       = local.private_subnet_ids
-#   target_group_arns = [aws_lb_target_group.catalogue.arn]
+  target_group_arns = [aws_lb_target_group.catalogue.arn]
   
   dynamic "tag" {  # we will get the iterator with name as tag
     for_each = merge(
@@ -172,18 +172,18 @@ resource "aws_autoscaling_policy" "example" {
   }
 }
 
-# resource "aws_lb_listener_rule" "catalogue" {
-#   listener_arn = local.backend_alb_listener_arn
-#   priority     = 10
+resource "aws_lb_listener_rule" "catalogue" {
+  listener_arn = local.backend_alb_listener_arn
+  priority     = 10
 
-#   action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.catalogue.arn
-#   }
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.catalogue.arn
+  }
 
-#   condition {
-#     host_header {
-#       values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
-#     }
-#   }
-# }
+  condition {
+    host_header {
+      values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
+    }
+  }
+}
