@@ -9,3 +9,8 @@ variable "environment" {
 variable "domain_name" {
     default = "techevolv.fun"
 }
+
+variable "deleting" {
+    default = {}
+  
+}
