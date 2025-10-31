@@ -10,7 +10,7 @@ variable "domain_name" {
     default = "techevolv.fun"
 }
 
-variable "deleting" {
+variable "catalogue_local" {
     default = {}
   
 }
