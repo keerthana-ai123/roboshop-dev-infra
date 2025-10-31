@@ -6,7 +6,7 @@ resource "aws_lb" "backend_alb" {
   # it should be private subnet ids
   subnets            = local.private_subnet_ids
 
-  enable_deletion_protection = true # prevents accidental deletion from UI
+  enable_deletion_protection = false # prevents accidental deletion from UI
 
   tags = merge (
     local.common_tags,
@@ -17,7 +17,7 @@ resource "aws_lb" "backend_alb" {
 }
 
 # Backend ALB listening on port number 80
-resource "aws_lb_listener" "front_end" {
+resource "aws_lb_listener" "backend_alb" {
   load_balancer_arn = aws_lb.backend_alb.arn
   port              = "80"
   protocol          = "HTTP"
@@ -45,4 +45,3 @@ resource "aws_route53_record" "backend_alb" {
     evaluate_target_health = true
   }
 }
-
