@@ -38,7 +38,7 @@ resource "aws_route53_record" "frontend_alb" {
   zone_id = var.zone_id
   name    = "roboshop-${var.environment}.${var.domain_name}" # roboshop-dev.daws86s.fun
   type    = "A"
-  allow_overwrite = true
+  #allow_overwrite = true
 
   alias {
     # These are ALB details, not our domain details
